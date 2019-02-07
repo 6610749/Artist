@@ -1,0 +1,78 @@
+{% extends "template.html" %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg">
+  {% endblock header %}
+
+  {% block content %}
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <h1 class="searchartiest"> 
+           All performances for <span class="artiest">{{ artiest.name }}</span> : {{ total }}
+
+        </h1>
+      </div>
+    </div>
+
+    {% if performances %}
+    {% for p in performances %}
+    <div class="card">
+      <div class="row">
+        <div class="col-md-2 date">
+          <p class="">
+            <h1 style="color: white" class="text-center ">
+              {{ p.date.strftime('%d') }}
+            </h1>
+          </p>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">{{ p.title }}</h4>
+            <p class="">
+              {% for a in p.artists %}
+              {{ a.name }}
+              {{ "," if not loop.last }}
+              {% endfor %}
+               
+              <br/>
+              <br/>
+              € {{p.price}}
+              <br/>
+              {{ p.omgevinf.name }}
+            </p>
+            <p class="card-text">
+              {{ p.description }}
+            </p>
+
+            <a href="{{p.link}}" class="btn btn-primary">Ticket Link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br/>
+    {% endfor %}
+    {% else %}
+
+    <div class="card">
+      <div class="row">
+
+        <div class="card-body">
+          <h4 class="card-title text-center">
+            Sorry , this artist have no performances 
+          </h4>
+
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+
+    
+    {% if total != 0 %}
+        {% include 'pagination.html' %}
+    {% endif %}
+
+  </div>
+  {% endblock content %}

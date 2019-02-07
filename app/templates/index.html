@@ -1,0 +1,164 @@
+{% extends 'template.html' %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg fixed-top">
+{% endblock header %}
+
+{% block content %}
+    <style>
+    body, html {
+      height: 100%;
+      background: url("https://images.unsplash.com/photo-1458891216473-4f26bb4eb40e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+    }
+    </style>
+          <div class="container">
+            <style>
+            body, html {
+              height: 100%;
+              background: url("https://images.unsplash.com/photo-1458891216473-4f26bb4eb40e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")no-repeat center center fixed;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+            }
+            </style>
+          <div class="row h-100 justify-content-between">
+            <div class="col-md-5 my-auto formbox">
+          <form method="GET" action="/zoeken">
+            <h2 class="artiestform">Artiest vinden</h2>
+            <div class="form-group">
+                <label for="datepicker-example" class="infolabel">ARTIEST</label>
+                  <select name="artiest" class="form-control1 selectpicker" data-live-search="true" data-style="form-control">
+
+                     
+                    {% for a in artists %}
+                        <option value="{{a.id}}">{{a.name}}</option>
+                    {% endfor %}
+                 
+                    <!--
+                         <option value="Ronnie Flex">Ronnie Flex</option>
+                    <option value="Boef">Boef</option>
+                    <option value="Lil Kleine">Lil Kleine</option>
+                    <option value="Lil Mosey">Lil Mosey</option>
+                    <option value="Lil Pump">Lil Pump</option>
+                    -->
+                  </select>
+            </div>
+
+                <div class="custom-controls-stacked">
+                  <!-- Checked Custom Radio -->
+                  <div class="custom-control custom-radio mb-3 float-left">
+                    <input type="radio" value="oneDate" id="customRadio1" name="customRadio" class="custom-control-input myRadio" checked>
+                    <label class="custom-control-label" for="customRadio1">One Date</label>
+                  </div>
+              
+                  <!-- Normal Custom Radio -->
+                  <div class="custom-control custom-radio mb-3 float-right">
+                    <input type="radio" value="rangeDate" id="customRadio3" name="customRadio" class="custom-control-input myRadio">
+                    <label class="custom-control-label" for="customRadio3">Range Date</label>
+                  </div>
+                </div>
+
+
+              <div class="oneDateDiv">
+                  <input type="text" name="datumOne" required="required" class="form-control" id="datepicker-example">
+              </div>                
+              
+              <div class="shards-demo rangeDateDiv" style="display: none">
+                <div class="input-daterange input-group" id="datepicker-range-example">
+                  <input id="rangedatepicker-example1" type="text" class="input-sm form-control" name="datumStart" placeholder="Start Date" />
+                  <input id="rangedatepicker-example2" type="text" class="input-sm form-control" name="datumEnd" placeholder="End Date" />
+                </div>
+              </div>
+
+             
+            
+            <div class="form-group">
+              <label for="exampleFormControlSelect1" class="infolabel">OMGEVING</label>
+              <select name="omgeving" class="form-control selectpicker" id="exampleFormControlSelect1">
+                
+                {% for o in omgevings %}
+                    <option value="{{o.id}}">{{o.name}}</option>
+                {% endfor %}
+                <!--
+            
+                <option>Gelderland</option>
+                <option>Noord-Holland</option>
+                <option>Zuid-Holland</option>
+                <option>Utrecht</option>
+                <option>Limburg</option>
+                <option>Zeeland</option>
+                <option>Flevoland</option>
+                <option>Overrijsel</option>
+                <option>Drenthe</option>
+                <option>Friesland</option>
+                <option>Brabant</option>
+                <option>Groningen</option>
+                -->
+                
+              </select>
+            </div>
+              <button type="submit" class="btn btn-primary pink">ZOEKEN</button>
+          </form>
+          </div>
+          </div>
+          </div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    var l = $('.myRadio').length;
+    $(".myRadio").on('change' ,function(){
+
+      switch($(this).val()) {
+        case 'oneDate':
+            $(".rangeDateDiv").hide();
+            $(".oneDateDiv").show();
+
+            $("#datepicker-example").prop('required',true);
+
+            $("#rangedatepicker-example1").prop('required',false);
+            $("rangedatepicker-example2").prop('required',false);
+
+            break;
+        case 'rangeDate':
+            $(".oneDateDiv").hide();
+            $(".rangeDateDiv").show();
+
+            $("#datepicker-example").prop('required',false);
+            
+            $("#rangedatepicker-example1").prop('required',true);
+            $("#rangedatepicker-example2").prop('required',true);
+            rangedatepicker-example1
+            break;
+      }
+    })
+
+    
+    $('#datepicker-range-example').datepicker({
+      format: 'dd/mm/yyyy',
+      autoclose: true,
+      language: 'fr',
+      orientation: 'bottom auto',
+      todayBtn: 'linked',
+      todayHighlight: true
+    });
+
+      
+      $('#datepicker-example').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        language: 'fr',
+        orientation: 'bottom auto',
+        todayBtn: 'linked',
+        todayHighlight: true
+      });
+
+</script>
+
+{% endblock script%}
+
+  </body>
+</html>

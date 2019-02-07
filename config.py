@@ -6,7 +6,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_ADMIN_SWATCH = 'cosmo'
 
-    ADMIN_EMAIL = "admin@admin.com"
-    ADMIN_PASSWORD = "admin"
+    ADMIN_EMAIL = "info@lilagenda.nl"
+    ADMIN_PASSWORD = "alertjenl"
     ADMIN_VERIFICATION = True
-    RESULT_PER_PAGE = 2
+    RESULT_PER_PAGE = 4
